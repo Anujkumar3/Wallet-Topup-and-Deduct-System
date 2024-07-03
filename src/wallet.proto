@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package wallet;
+
+// The wallet service definition.
+service WalletService {
+  // Topup the wallet
+  rpc Topup (TopupRequest) returns (TopupResponse) {}
+
+  // Deduct from the wallet
+  rpc Deduct (DeductRequest) returns (DeductResponse) {}
+
+  // Get the current balance
+  rpc GetBalance (GetBalanceRequest) returns (GetBalanceResponse) {}
+}
+
+// The request message containing the user ID and amount for topup.
+message TopupRequest {
+  string user_id = 1;
+  float amount = 2;
+}
+
+// The response message containing the status, new balance, and transaction ID for topup.
+message TopupResponse {
+  bool status = 1;
+  float new_balance = 2;
+  string transaction_id = 3;
+}
+
+// The request message containing the user ID and amount for deduct.
+message DeductRequest {
+  string user_id = 1;
+  float amount = 2;
+}
+
+// The response message containing the status, new balance, and transaction ID for deduct.
+message DeductResponse {
+  bool status = 1;
+  float new_balance = 2;
+  string transaction_id = 3;
+}
+
+// The request message containing the user ID for balance inquiry.
+message GetBalanceRequest {
+  string user_id = 1;
+}
+
+// The response message containing the current balance.
+message GetBalanceResponse {
+  float balance = 1;
+}
